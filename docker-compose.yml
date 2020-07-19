@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  led-selling:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - 3000:8000
+    volumes:
+      - ./led-selling:/led-selling
+      - /led-selling/node_modules
+    restart: always
+    networks:
+      - led-selling-network
+
+  mongo:
+    image: mongo:4.2.1
+    environment:
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD:
+      MONGO_INITDB_DATABASE: led_selling
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb/mongo-user.sh:/docker-entrypoint-initdb.d/mongo-user.sh:ro
+      - ./mongodb/data/db/:/data/db/
+    restart: always
+    networks:
+      - led-selling-network
+
+networks:
+  led-selling-network:
