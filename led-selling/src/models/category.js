@@ -116,7 +116,9 @@ CategorySchema.statics = {
 
   findLeafCategories() {
     return this.find({
-      type: CATEGORY_TYPE.LEAF_CATEGORY,
+      type: {
+        "$ne": CATEGORY_TYPE.NOT_LEAF_CATEGORY,
+      },
     }).exec();
   },
 
