@@ -1,0 +1,110 @@
+<div class="container">
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><span>Trang chủ</span></a></li>
+            <li class="breadcrumb-item"><a href="/admin"><span>Quản trị</span></a></li>
+            <li class="breadcrumb-item"><a href="/admin/category"><span>Danh mục</span></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><span>Thêm danh mục</span></li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <form autocomplete="off" action="event.preventDefault();" onsubmit="event.preventDefault(); showCategoryCreationConfirmation();">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5 no-padding">
+                            <div class="container no-padding">
+                                <div class="row single-image-container no-margin">
+                                    <div class="avatar-wrapper">
+                                        <img class="profile-pic" src="/assets/images/no-image.png" />
+                                        <div class="upload-button">
+                                            <i class="fa fa-upload" aria-hidden="true"></i>
+                                        </div>
+                                        <input name="image" class="file-upload" type="file" accept="image/*" style="display: none;"/>
+                                    </div>
+                                </div>
+                                <div class="row multiple-image-container no-margin">
+                                    <div class="col col-md-3 images-single">
+                                        <div class="container no-padding">
+                                            <div class="row single-image-container no-margin">
+                                                <div class="avatar-wrapper">
+                                                    <img class="profile-pic" />
+                                                    <div class="upload-button">
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                                    </div>
+                                                    <input name="images" class="file-upload" type="file" accept="image/*" style="display: none;"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 no-padding">
+                            <div class="container-horizon-padding">
+                                <h2 class="text-center">Thông tin danh mục</h2>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="parentId">Danh mục cha</label>
+                                    <div class="col-md-9 control-field">
+                                        <select name="parentId" id="selectpicker" class="selectpicker" data-live-search="true" data-style="btn-outline-info" data-size="10" data-width="100%">
+                                            <%- ejsBuilder.buildCategoryOptionsWithEmpty(notLeafCategories) %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="name">Tên danh mục</label>
+                                    <div class="col-md-9 control-field">
+                                        <input id="name" name="name" placeholder="Tên danh mục" class="form-control" required="true" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col no-padding">
+                            <h3>Mô tả</h3>
+
+                            <!-- The toolbar will be rendered in this container. -->
+                            <div id="toolbar-container"></div>
+
+                            <!-- This container will become the editable. -->
+                            <div id="editor" style="border: 1px solid #ccc;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 no-padding">
+                            <div class="form-group">
+                                <button id="submit" class="btn btn-primary btn-block" type="submit">Thêm danh mục</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="categoryCreationConfirmation" tabindex="-1" role="dialog" aria-labelledby="categoryCreationConfirmationTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="categoryCreationConfirmationTitle">Thêm danh mục</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Xác nhận thêm danh mục
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+          <button type="button" class="btn btn-primary" onclick="submitCategoryCreation();">Đồng ý</button>
+        </div>
+      </div>
+    </div>
+</div>

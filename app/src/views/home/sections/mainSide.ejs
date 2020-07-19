@@ -1,0 +1,19 @@
+<div class="container">
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><span>Trang chủ</span></li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="row list-view-header">
+                    Danh mục sản phẩm
+                </div>
+                <div class="row">
+                    <%- ejsBuilder.buildCategoriesView(rootCategories) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

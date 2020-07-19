@@ -1,0 +1,282 @@
+body {
+  padding-top: 125px;
+  background-color: white;
+}
+
+.navbar.fixed-top {
+  background: #f5f5f5;
+  /* border-bottom: 1px solid #f1f1f1; */
+  box-shadow: 0 5px 5px -5px #ccc;
+}
+
+.navigation-clean.navbar-light .navbar-nav .nav-item:last-child .nav-link {
+  padding-right: 0px;
+}
+
+.breadcrumb-nav {
+  margin-bottom: 50px;
+}
+
+.footer-clean {
+  background: #f5f5f5;
+  /* border-top: 1px solid #f1f1f1; */
+  box-shadow: 0 -5px 5px -5px #ccc;
+  margin-top: 50px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.container-horizon-padding {
+  padding-left: 50px;
+}
+
+.container-vertical-padding {
+  padding-top: 50px;
+}
+
+.product-image {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+.single-image-container {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+  border: 1px solid #8d8d8d2c;
+  border-radius: 5px;
+}
+
+.product-image > *, .single-image-container > * {
+  position: absolute;
+  max-width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100% !important;
+  width: 100% !important;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.col .tab-content {
+  border: 1px solid;
+  border-color: #fff #dee2e6 #dee2e6;
+}
+
+.tab-content .tab-pane {
+  padding: 16px;
+}
+
+.detail-header {
+  border-bottom: 1px solid #ccc;
+}
+
+.detail-name {
+  font-size: 24px;
+}
+
+.detail-model {
+  opacity: 0.75;
+}
+
+.mini-detail-specifications {
+  font-size: 14px;
+}
+
+.mini-detail-specification {
+  border-bottom: 1px solid #232323;
+}
+
+.mini-control-label, .mini-control-field {
+  padding: 0px;
+}
+
+.short-detail-specifications {
+  margin-top: 20px;
+}
+
+.detail-specifications {
+  padding: 0px 10px;
+}
+
+.detail-specification {
+  line-height: 32px;
+}
+
+.detail-see-more {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.product-card {
+  overflow: hidden;
+}
+
+.product-card-body {
+  text-align: center;
+  background-color: #fff;
+  padding: 15px;
+  /* z-index: 1; */
+}
+
+/* .product-card .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  z-index: 0;
+} */
+
+.product-card .container .single-image-container {
+  border: none;
+}
+
+.product-card .product-card-body .card-title {
+  margin: auto;
+}
+
+/* .product-card .container .product-card-detail {
+  z-index: -1;
+} */
+
+/* .product-card .product-card-detail {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  margin: 0 -15px;
+} */
+
+/* .product-card:hover .product-image {
+  top: -100%;
+}
+
+.product-card:hover .product-card-detail {
+  top: 0px;
+  transition: 0.5s;
+} */
+
+.multiple-image-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  display: inline-block;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.multiple-image-container .images-single {
+  display: inline-block;
+  float: none;
+  padding: 0px;
+}
+
+.custom-carousel-indicators {
+  position: relative;
+}
+
+.carousel-indicators .single-image-container li {
+  margin: unset;
+}
+
+.single-image-container .carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.single-image-container .carousel-inner > .carousel-item {
+  width: 100%;
+  height: 100%;
+}
+
+.single-image-container .carousel-inner > .carousel-item > a {
+  position: absolute;
+  max-width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100% !important;
+  width: 100% !important;
+  justify-content: center;
+  align-items: center;
+  display: flex !important;
+}
+
+.tab-content {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.multiple-image-container > .images-single {
+  margin-right: -5px;
+}
+
+.tooltip.show {
+  opacity: 0.8;
+}
+
+.category-header {
+  background-color: whitesmoke;
+  border-radius: 5px;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+.category-header .category-name {
+  color: lightseagreen;
+  text-transform: uppercase;
+}
+
+.category-header .category-desc {
+  text-align: justify;
+}
+
+.list-view-header {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: lightseagreen;
+  background-color: whitesmoke;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.error-page-content {
+  text-align: center;
+  text-transform: uppercase;
+  color: lightseagreen;
+}
+
+.page-content {
+  opacity: 0.9;
+}

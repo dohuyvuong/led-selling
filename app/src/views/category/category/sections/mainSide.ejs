@@ -1,0 +1,44 @@
+<div class="container">
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><span>Trang chủ</span></a></li>
+            <li class="breadcrumb-item"><a href="/category"><span>Danh mục</span></a></li>
+            <%- ejsBuilder.buildBreadcrumb(category.breadcrumb) %>
+            <li class="breadcrumb-item active" aria-current="page"><span><%- category.name %></span></li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="row category-header">
+                    <div class="col-md-10">
+                        <div class="category-info">
+                            <div class="category-name"><h4><%= category.name %></h4></div>
+                            <div class="category-desc"><%- category.description %></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="container no-padding">
+                            <div class="row product-image single-image-container no-margin">
+                                <img src="<%= category.image %>" alt="<%= category.name %>" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="row list-view-header">
+                    <%- ejsBuilder.buildListViewHeader(subcategories, products) %>
+                </div>
+                <div class="row">
+                    <%- ejsBuilder.buildCategoriesView(subcategories) %>
+                    <%- ejsBuilder.buildProductsView(products) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
