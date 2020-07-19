@@ -114,7 +114,7 @@ let productBuilder = {
                     <div class="row mini-detail-specification no-margin">
                         <div class="col-6 mini-control-label">${specification.title}</div>
                         <div class="col-6 mini-control-field">
-                            <a href=${specification.value} targer="_blank" />
+                            <a href=${specification.value} targer="_blank">${specification.value}</a>
                         </div>
                     </div>
                 `;
@@ -150,7 +150,7 @@ let productBuilder = {
                     <div class="row detail-specification">
                         <div class="col-4 control-label">${specification.title}</div>
                         <div class="col-8 control-field">
-                            <a href=${specification.value} targer="_blank" />
+                            <a href=${specification.value} targer="_blank">${specification.value}</a>
                         </div>
                     </div>
                 `;
@@ -187,7 +187,7 @@ let productBuilder = {
                     <div class="row detail-specification">
                         <div class="col-4 control-label">${specification.title}</div>
                         <div class="col-8 control-field">
-                            <a href=${specification.value} targer="_blank" />
+                            <a href=${specification.value} targer="_blank">${specification.value}</a>
                         </div>
                     </div>
                 `;
