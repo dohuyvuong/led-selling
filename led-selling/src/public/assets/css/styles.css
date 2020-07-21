@@ -128,7 +128,8 @@ img {
 }
 
 .detail-specification {
-  line-height: 32px;
+  /* line-height: 32px; */
+  padding: 5px 0;
 }
 
 .detail-see-more {
