@@ -105,6 +105,7 @@ img {
 }
 
 .mini-detail-specifications {
+  overflow-wrap: break-word;
   font-size: 14px;
 }
 
@@ -117,10 +118,12 @@ img {
 }
 
 .short-detail-specifications {
+  overflow-wrap: break-word;
   margin-top: 20px;
 }
 
 .detail-specifications {
+  overflow-wrap: break-word;
   padding: 0px 10px;
 }
 
