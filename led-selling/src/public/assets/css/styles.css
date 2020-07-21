@@ -36,8 +36,15 @@ a:hover {
   margin: 0px;
 }
 
-.container-horizon-padding {
-  padding-left: 50px;
+.right-detail-container {
+  padding-top: 50px;
+}
+
+@media (min-width: 768px) {
+  .right-detail-container {
+    padding-top: 0;
+    padding-left: 50px;
+  }
 }
 
 .container-vertical-padding {
