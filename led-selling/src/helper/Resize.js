@@ -43,4 +43,4 @@ class Resize {
   }
 }
 
-module.exports = Resize;
+export default Resize;

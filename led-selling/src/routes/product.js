@@ -8,4 +8,4 @@ let router = express.Router();
  */
 router.get("/:alias", productController.getByAlias);
 
-module.exports = router;
+export default router;

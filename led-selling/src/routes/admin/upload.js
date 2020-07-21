@@ -28,4 +28,4 @@ router.post("/", async (req, res, next) => {
   });
 }, uploadController.uploadImage);
 
-module.exports = router;
+export default router;

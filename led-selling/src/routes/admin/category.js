@@ -13,4 +13,4 @@ router.get("/create", categoryController.admin.getCategoryCreationPage);
  */
 router.post("/create", categoryController.admin.add);
 
-module.exports = router;
+export default router;

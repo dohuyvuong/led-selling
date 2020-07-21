@@ -10,4 +10,4 @@ let BreadcrumbSchema = new mongoose.Schema({
 });
 BreadcrumbSchema.add({ breadcrumb: BreadcrumbSchema });
 
-module.exports = BreadcrumbSchema;
+export default BreadcrumbSchema;

@@ -13,4 +13,4 @@ router.get("/create", productController.admin.getProductCreationPage);
  */
 router.post("/create", productController.admin.add);
 
-module.exports = router;
+export default router;

@@ -1,7 +1,8 @@
 import express from "express";
 import connectDB from "./config/connectDB";
 import configViewEngine from "./config/viewEngine";
-import initRoutes from "./routes";
+import router from "./routes";
+import { errorPageController } from "./controllers";
 import bodyParser from "body-parser";
 // import connectFlash from "connect-flash";
 // import configSession from "./config/session";
@@ -46,8 +47,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(passport.session());
 // initPassport(passport);
 
-// Init all routes
-initRoutes(app);
+// Handle app routes
+app.use("/", router);
+
+// Handle error routes
+app.use(errorPageController.getErrorPage);
 
 // // Config socketIO
 // configSocketIO(io);

@@ -13,4 +13,4 @@ router.get("/", categoryController.getCategoryPage);
  */
 router.get("/:alias", categoryController.getCategoryPageByAlias);
 
-module.exports = router;
+export default router;
