@@ -1,0 +1,79 @@
+<div class="container">
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><span>Trang chủ</span></a></li>
+            <li class="breadcrumb-item"><a href="/admin"><span>Quản trị</span></a></li>
+            <li class="breadcrumb-item"><a href="/admin/customized-page"><span>Trang tùy chỉnh</span></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><span>Thêm trang tùy chỉnh</span></li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <form autocomplete="off" action="event.preventDefault();" onsubmit="event.preventDefault(); showCustomizedPageCreationConfirmation();">
+                <div class="container">
+                    <div class="row">
+                        <div class="col no-padding">
+                            <div>
+                                <h2 class="text-center">Thông tin trang</h2>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="name">Tên trang</label>
+                                    <div class="col-md-9 control-field">
+                                        <input id="name" name="name" placeholder="Tên trang" class="form-control" required="true" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="path">Đường dẫn</label>
+                                    <div class="col-md-9 control-field">
+                                        <input id="path" name="path" placeholder="Đường dẫn" class="form-control" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col no-padding">
+                            <h3>Mô tả</h3>
+
+                            <!-- The toolbar will be rendered in this container. -->
+                            <div id="toolbar-container"></div>
+
+                            <!-- This container will become the editable. -->
+                            <div id="editor" style="border: 1px solid #ccc;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 no-padding">
+                            <div class="form-group">
+                                <button id="submit" class="btn btn-primary btn-block" type="submit">Thêm trang</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="customizedPageCreationConfirmation" tabindex="-1" role="dialog" aria-labelledby="customizedPageCreationConfirmationTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="customizedPageCreationConfirmationTitle">Thêm trang</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Xác nhận thêm trang
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+          <button type="button" class="btn btn-primary" onclick="submitCustomizedPageCreation();">Đồng ý</button>
+        </div>
+      </div>
+    </div>
+</div>

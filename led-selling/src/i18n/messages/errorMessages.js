@@ -6,10 +6,10 @@ export const errorMessages = {
   product_category_is_required: "Danh mục của sản phẩm là bắt buộc!",
   product_category_must_be_leaf: "Danh mục của sản phẩm là danh mục không chứa danh mục nào khác!",
   product_not_found: "Không tìm thấy sản phẩm!",
-  page_not_found: "Không tìm thấy trang!",
+  customized_page_not_found: "Không tìm thấy trang!",
   product_alias_existed: "Không phải lỗi, bạn chỉ cần gửi lại yêu cầu!",
   category_alias_existed: "Tên danh mục đã tồn tại!",
-  page_alias_existed: "Đường dẫn trang đã tồn tại!",
+  customized_page_alias_existed: "Đường dẫn trang đã tồn tại!",
   require_fields: (fields) => {
     return `Vui lòng nhập các trường sau: ${fields}`;
   },

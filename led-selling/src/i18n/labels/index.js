@@ -6,6 +6,10 @@ export const labels = {
     categoryId: "Danh mục",
     name: "Tên sản phẩm",
   },
+  customized_page_require: {
+    name: "Tên trang",
+    path: "Đường dẫn",
+  },
   product_specifications: {
     powerCons: "Công suất tiêu thụ",
     brand: "Thương hiệu",
