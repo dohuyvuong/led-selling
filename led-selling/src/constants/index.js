@@ -1,0 +1,4 @@
+export const DEFAULT_LIMIT = {
+  PRODUCT_LIMIT: 20,
+  CATEGORY_LIMIT: 20,
+};

@@ -27,6 +27,8 @@ let CategorySchema = new mongoose.Schema({
     default: CATEGORY_TYPE.UNDEFINED,
   },
   breadcrumb: Breadcrumb,
+  createdAt: { type: Number, default: Date.now },
+  updatedAt: { type: Number, default: Date.now },
 }, {
   autoCreate: true,
   toJSON: {
@@ -104,8 +106,18 @@ CategorySchema.statics = {
     }).exec();
   },
 
-  findRootCategories() {
+  findRootCategories(offset, limit) {
     return this.find({
+      $or: [
+        { parentId: { $exists: false } },
+        { parentId: { $eq: null } },
+        { parentId: { $eq: "" } },
+      ],
+    }).sort({ "createdAt": -1 }).skip(offset).limit(limit).exec();
+  },
+
+  countRootCategories() {
+    return this.countDocuments({
       $or: [
         { parentId: { $exists: false } },
         { parentId: { $eq: null } },
@@ -130,8 +142,14 @@ CategorySchema.statics = {
     }).exec();
   },
 
-  findSubcategoriesByCategoryId(id) {
+  findSubcategoriesByCategoryId(id, offset, limit) {
     return this.find({
+      "breadcrumb.categoryId": id.toString(),
+    }).sort({ "createdAt": -1 }).skip(offset).limit(limit).exec();
+  },
+
+  countSubcategoriesByCategoryId(id) {
+    return this.countDocuments({
       "breadcrumb.categoryId": id.toString(),
     }).exec();
   },

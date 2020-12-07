@@ -30,6 +30,8 @@ let ProductSchema = new mongoose.Schema({
   alias: String,
   breadcrumb: Breadcrumb,
   shortid: { type: String, default: shortid.generate },
+  createdAt: { type: Number, default: Date.now },
+  updatedAt: { type: Number, default: Date.now },
 }, {
   autoCreate: true,
   toJSON: {
@@ -109,8 +111,14 @@ ProductSchema.statics = {
     }).exec();
   },
 
-  findProductsByCategoryId(categoryId) {
+  findProductsByCategoryId(categoryId, offset, limit) {
     return this.find({
+      categoryId: categoryId
+    }).sort({ "createdAt": -1 }).skip(offset).limit(limit).exec();
+  },
+
+  countProductsByCategoryId(categoryId) {
+    return this.countDocuments({
       categoryId: categoryId
     }).exec();
   },

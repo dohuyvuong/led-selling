@@ -70,6 +70,22 @@ let buildProductsView = (products) => {
   }).join("");
 };
 
+let buildRootCategoriesPagination = (noOfPages) => {
+  let pages = "";
+  for (let i = 0; i < noOfPages; i++) {
+    pages += `<li class="page-item"><a class="page-link" href="#">${i + 1}</a></li>`;
+  }
+  return `
+    <nav aria-label="Page navigation example" class="wrapped-pagination">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            ${pages}
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+  `;
+};
+
 let buildCategoryOptions = (categories) => {
   return categories.map(category => {
     return `<option value="${category._id}">${category.name}</option>`;
@@ -257,6 +273,7 @@ export const ejsBuilder = {
   buildListViewHeader,
   buildCategoriesView,
   buildProductsView,
+  buildRootCategoriesPagination,
   buildCategoryOptions,
   buildCategoryOptionsWithEmpty,
   productBuilder,

@@ -3,6 +3,7 @@ import { errorMessages } from "../i18n/messages";
 import { ejsBuilder } from "../helper";
 import logger from "winston";
 import { categoryService } from "../services";
+import { DEFAULT_LIMIT } from "../constants";
 
 /**
  * Return Response rendered index page
@@ -15,9 +16,13 @@ let getHomePage = async (req, res) => {
   try {
     let rootCategories = await categoryService.findRootCategories();
 
+    let noOfRootCategories = await categoryService.countRootCategories();
+    let noOfPages = Math.ceil(noOfRootCategories / DEFAULT_LIMIT.CATEGORY_LIMIT);
+
     return res.render("home/index", {
       ejsBuilder,
       rootCategories,
+      noOfPages,
     });
   } catch (error) {
     // Log error

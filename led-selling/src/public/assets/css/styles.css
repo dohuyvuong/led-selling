@@ -291,3 +291,11 @@ img {
 .page-content {
   opacity: 0.9;
 }
+
+.wrapped-pagination {
+  margin: auto;
+}
+
+.wrapped-pagination .pagination {
+  margin-top: 1rem;
+}

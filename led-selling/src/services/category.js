@@ -1,5 +1,6 @@
 import { CategoryModel } from "../models";
 import { errorMessages } from "../i18n/messages";
+import { DEFAULT_LIMIT } from "../constants";
 import createError from "http-errors";
 import logger from "winston";
 
@@ -66,11 +67,22 @@ let findByAlias = async (alias) => {
 
 /**
  * Find root categories
+ * @param {Number} offset
+ * @param {Number} limit
  */
-let findRootCategories = async () => {
+let findRootCategories = async (offset = 0, limit = DEFAULT_LIMIT.CATEGORY_LIMIT) => {
   logger.debug("Find root categories");
 
-  return await CategoryModel.findRootCategories();
+  return await CategoryModel.findRootCategories(offset, limit);
+};
+
+/**
+ * Count root categories
+ */
+let countRootCategories = async () => {
+  logger.debug("Count root categories");
+
+  return await CategoryModel.countRootCategories();
 };
 
 /**
@@ -94,11 +106,22 @@ let findNotLeafCategories = async () => {
 /**
  * Find subcategories
  * @param {String} categoryId
+ * @param {Number} offset
+ * @param {Number} limit
  */
-let findSubcategoriesByCategoryId = async (categoryId) => {
+let findSubcategoriesByCategoryId = async (categoryId, offset = 0, limit = DEFAULT_LIMIT.CATEGORY_LIMIT) => {
   logger.debug("Find subcategories with categoryId=%s", categoryId);
 
-  return await CategoryModel.findSubcategoriesByCategoryId(categoryId);
+  return await CategoryModel.findSubcategoriesByCategoryId(categoryId, offset, limit);
+};
+
+/**
+ * Count subcategories
+ */
+let countSubcategoriesByCategoryId = async (categoryId) => {
+  logger.debug("Count subcategories with categoryId=%s", categoryId);
+
+  return await CategoryModel.countSubcategoriesByCategoryId(categoryId);
 };
 
 export const categoryService = {
@@ -107,7 +130,9 @@ export const categoryService = {
   findById,
   findByAlias,
   findRootCategories,
+  countRootCategories,
   findLeafCategories,
   findNotLeafCategories,
   findSubcategoriesByCategoryId,
+  countSubcategoriesByCategoryId,
 };

@@ -1,5 +1,6 @@
 import { ProductModel } from "../models";
 import { errorMessages } from "../i18n/messages";
+import { DEFAULT_LIMIT } from "../constants";
 import logger from "winston";
 
 /**
@@ -66,11 +67,22 @@ let findByAlias = async (alias) => {
 /**
  * Find products by categoryId
  * @param {String} categoryId
+ * @param {Number} offset
+ * @param {Number} limit
  */
-let findProductsByCategoryId = async (categoryId) => {
+let findProductsByCategoryId = async (categoryId, offset = 0, limit = DEFAULT_LIMIT.PRODUCT_LIMIT) => {
   logger.debug("Find products by categoryId=%s", categoryId);
 
-  return await ProductModel.findProductsByCategoryId(categoryId);
+  return await ProductModel.findProductsByCategoryId(categoryId, offset, limit);
+};
+
+/**
+ * Count products by categoryId
+ */
+let countProductsByCategoryId = async (categoryId) => {
+  logger.debug("Count products by categoryId=%s", categoryId);
+
+  return await ProductModel.countProductsByCategoryId(categoryId);
 };
 
 export const productService = {
@@ -79,4 +91,5 @@ export const productService = {
   findById,
   findByAlias,
   findProductsByCategoryId,
+  countProductsByCategoryId,
 };
