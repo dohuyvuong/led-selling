@@ -23,6 +23,7 @@ let getHomePage = async (req, res) => {
       ejsBuilder,
       rootCategories,
       noOfPages,
+      route: '/',
     });
   } catch (error) {
     // Log error

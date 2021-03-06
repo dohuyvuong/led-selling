@@ -25,6 +25,7 @@ let getCategoryPage = async (req, res) => {
       ejsBuilder,
       rootCategories,
       noOfPages,
+      route: '/category',
     });
   } catch (error) {
     // Log error

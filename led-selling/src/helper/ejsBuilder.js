@@ -32,7 +32,7 @@ let buildListViewHeader = (categories, products) => {
 let buildCategoriesView = (categories) => {
   return categories.map(category => {
     return `
-        <div class="card col-md-4 col-lg-3 product-card no-padding">
+        <div class="card col-md-3 col-lg-2 product-card no-padding">
             <div class="container no-padding">
                 <div class="row product-image single-image-container no-margin">
                     <a href="/category/${category.alias}"><img src="${category.image}" alt="${category.name}" /></a>
@@ -56,7 +56,7 @@ let buildProductsView = (products) => {
     let specifications = productBuilder.buildMiniSpecifications(product);
 
     return `
-        <div class="card col-md-4 col-lg-3 product-card no-padding">
+        <div class="card col-md-3 col-lg-2 product-card no-padding">
             <div class="container no-padding">
                 <div class="row product-image single-image-container no-margin" data-toggle="tooltip" data-html="true" title='${specifications}' data-placement="right">
                     <a href="/product/${product.alias}"><img src="${product.image}" alt="${productNameAndModel}" /></a>

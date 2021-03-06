@@ -11,13 +11,13 @@
         <div class="col">
             <div class="container">
                 <div class="row category-header">
-                    <div class="col-md-10">
-                        <div class="category-info">
-                            <div class="category-name"><h4><%= category.name %></h4></div>
-                            <div class="category-desc"><%- category.description %></div>
-                        </div>
+                    <div class="col-12 pb-3">
+                        <div class="category-name"><h4><%= category.name %></h4></div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-8 col-lg-10">
+                        <div class="category-desc"><%- category.description %></div>
+                    </div>
+                    <div class="col-md-4 col-lg-2">
                         <div class="container no-padding">
                             <div class="row product-image single-image-container no-margin">
                                 <img src="<%= category.image %>" alt="<%= category.name %>" />
