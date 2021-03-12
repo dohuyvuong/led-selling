@@ -9,8 +9,9 @@ class Resize {
   }
 
   async save(buffer) {
-    const filename = Resize.filename();
+    const { filename, thumbFilename } = Resize.filename();
     const filepath = this.filepath(filename);
+    const thumbFilepath = this.filepath(thumbFilename);
 
     await sharp(buffer, {})
       .resize(1000, 1000, { // size image 1000x1000
@@ -19,14 +20,24 @@ class Resize {
       })
       .toFile(filepath);
 
+    await sharp(buffer, {})
+      .resize(500, 500, { // size image 500x500
+        fit: sharp.fit.inside,
+        withoutEnlargement: true
+      })
+      .jpeg({ quality: 50, chromaSubsampling: '4:4:4' })
+      .toFile(thumbFilepath);
+
     return {
       location: this.folder + "/" + filename,
+      thumbLocation: this.folder + "/" + thumbFilename,
     };
   }
 
   static filename() {
-     // random file name
-    return `${uuid()}.png`;
+    // random file name
+    const filename = uuid();
+    return { filename: `${filename}.png`, thumbFilename: `${filename}-thumb.png` };
   }
 
   filepath(filename) {

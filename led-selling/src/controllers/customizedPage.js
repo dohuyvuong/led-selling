@@ -25,6 +25,7 @@ let getByAlias = async (req, res, next) => {
     return res.render("customized-page/index", {
       ejsBuilder,
       customizedPage,
+      route: `/${alias}`,
     });
   } catch (error) {
     logger.error(error);

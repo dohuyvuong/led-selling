@@ -2,7 +2,6 @@ import express from "express";
 import connectDB from "./config/connectDB";
 import configViewEngine from "./config/viewEngine";
 import router from "./routes";
-import { errorPageController } from "./controllers";
 import bodyParser from "body-parser";
 // import connectFlash from "connect-flash";
 // import configSession from "./config/session";
@@ -50,8 +49,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Handle app routes
 app.use("/", router);
 
-// Handle error routes
-app.use(errorPageController.getErrorPage);
 
 // // Config socketIO
 // configSocketIO(io);

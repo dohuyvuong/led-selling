@@ -35,7 +35,7 @@ let buildCategoriesView = (categories) => {
         <div class="card col-md-3 col-lg-2 product-card no-padding">
             <div class="container no-padding">
                 <div class="row product-image single-image-container no-margin">
-                    <a href="/category/${category.alias}"><img src="${category.image}" alt="${category.name}" /></a>
+                    <a href="/category/${category.alias}"><img src="${category.thumbImage || '/assets/images/no-image.png'}" alt="${category.name}" /></a>
                 </div>
                 <div class="row card-body product-card-body no-margin">
                     <div class="card-title"><a href="/category/${category.alias}">${category.name}</a></div>
@@ -59,7 +59,7 @@ let buildProductsView = (products) => {
         <div class="card col-md-3 col-lg-2 product-card no-padding">
             <div class="container no-padding">
                 <div class="row product-image single-image-container no-margin" data-toggle="tooltip" data-html="true" title='${specifications}' data-placement="right">
-                    <a href="/product/${product.alias}"><img src="${product.image}" alt="${productNameAndModel}" /></a>
+                    <a href="/product/${product.alias}"><img src="${product.thumbImage || '/assets/images/no-image.png'}" alt="${productNameAndModel}" /></a>
                 </div>
                 <div class="row card-body product-card-body no-margin">
                     <div class="card-title"><a href="/product/${product.alias}">${productNameAndModel}</a></div>
@@ -108,6 +108,10 @@ let productBuilder = {
 
   buildMiniSpecifications: (product) => {
     let specifications = product.specifications;
+
+    if (!specifications.length) {
+      return '';
+    }
 
     if (specifications && specifications.length > 8) {
       specifications = specifications.slice(0, 8);

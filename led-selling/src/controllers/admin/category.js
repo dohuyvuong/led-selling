@@ -44,7 +44,9 @@ let add = async (req, res) => {
       description: req.body.description,
       parentId: req.body.parentId || null,
       image: req.body.image,
+      thumbImage: req.body.thumbImage,
       images: req.body.images,
+      thumbImages: req.body.thumbImages,
     };
 
     let result = await categoryService.add(categoryItem);

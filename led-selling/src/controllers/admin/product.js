@@ -61,7 +61,9 @@ let add = async (req, res) => {
       model: req.body.model,
       description: req.body.description,
       image: req.body.image,
+      thumbImage: req.body.thumbImage,
       images: req.body.images,
+      thumbImages: req.body.thumbImages,
       specifications: specifications,
     };
 

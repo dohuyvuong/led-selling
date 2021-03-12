@@ -2,8 +2,22 @@ function onClickedUploadButton() {
   $(this).parent().find(".file-upload").click();
 }
 
+function onRemoveImage() {
+  const parentEl = $(this).parent();
+  const url = $(parentEl).find(".profile-pic")?.attr('src');
+  if (url && url !== '/assets/images/no-image.png') {
+    new DeleteImageAdapter([url]).delete();
+    $(this).closest('.images-single').remove();
+  }
+}
+
 function onChangedImage(){
-  let parentEl = $(this).parent();
+  const parentEl = $(this).parent();
+  const oldUrl = $(parentEl).find(".profile-pic")?.attr('src');
+
+  if (oldUrl && oldUrl !== '/assets/images/no-image.png') {
+      new DeleteImageAdapter([oldUrl]).delete();
+  }
 
   if (this.files && this.files[0]) {
       let formdata = new FormData();
@@ -19,8 +33,18 @@ function onChangedImage(){
           .done(function (result) {
               alertify.success("Tải ảnh lên thành công!");
               $(parentEl).find(".profile-pic").attr('src', result.location);
+              $(parentEl).find(".profile-pic").data('thumb-src', result.thumbLocation);
 
-              if (parentEl.parents(".multiple-image-container").length == 1) {
+              if (!oldUrl && parentEl.parents(".multiple-image-container").length == 1) {
+                  let items = parentEl.parents(".multiple-image-container").children();
+                  let removeImageButton = $(`
+                    <div class="remove-image-button">
+                      <i class="fas fa-times-circle"></i>
+                    </div>
+                  `);
+                  removeImageButton.insertBefore($(items[items.length - 1]).find('.file-upload'));
+                  removeImageButton.on('click', onRemoveImage);
+
                   let newImageUpload = $(`
                       <div class="col col-md-3 images-single">
                           <div class="container no-padding">

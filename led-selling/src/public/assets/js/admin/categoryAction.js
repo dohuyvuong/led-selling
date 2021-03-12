@@ -20,14 +20,20 @@ function submitCategoryCreation() {
     if (imageEl && imageEl.attr("src")) {
         data.image = imageEl.attr("src");
     }
+    if (imageEl && imageEl.data("thumb-src")) {
+        data.thumbImage = imageEl.data("thumb-src");
+    }
 
     data.images = $("input[name='images']").parent().find(".profile-pic").toArray().filter(function (el) {
         return $(el).attr("src");
     }).map(function (el) {
         return $(el).attr("src");
     });
-
-    console.log(data);
+    data.thumbImages = $("input[name='images']").parent().find(".profile-pic").toArray().filter(function (el) {
+        return $(el).data("thumb-src");
+    }).map(function (el) {
+        return $(el).data("thumb-src");
+    });
 
     let description = editor.getData();
     if (description) {

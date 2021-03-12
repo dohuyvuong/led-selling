@@ -1,5 +1,5 @@
 import express from "express";
-import { homeController } from "../controllers";
+import { errorPageController, homeController } from "../controllers";
 import { customizedPageController } from "../controllers";
 
 import adminRoute from "./admin";
@@ -17,5 +17,8 @@ router.use("/customized-page", customizedPageRoute);
 router.use("/category", categoryRoute);
 
 router.get("/:customizedPageAlias", customizedPageController.getByAlias);
+
+// Handle error get-routes
+router.get(/.*/, errorPageController.getErrorPage)
 
 export default router;

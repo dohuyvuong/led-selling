@@ -14,7 +14,9 @@ let CategorySchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: String,
   image: String,
+  thumbImage: String,
   images: [ String ],
+  thumbImages: [ String ],
   parentId: String,
   alias: String,
   type: {

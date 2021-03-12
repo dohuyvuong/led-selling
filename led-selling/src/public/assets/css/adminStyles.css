@@ -109,6 +109,32 @@
   color: #34495e;
   z-index: -1;
 }
-.avatar-wrapper .upload-button:hover .fa-plus {
+.avatar-wrapper:hover .fa-plus {
+  opacity: 0;
+}
+.avatar-wrapper > .profile-pic[src] ~ .remove-image-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+.avatar-wrapper > .profile-pic[src] ~ .remove-image-button > .fa-times-circle {
+  opacity: 0;
+  transition: all .3s ease;
+  color: #34495e;
+  font-size: 24px;
+}
+.avatar-wrapper:hover > .profile-pic[src] ~ .remove-image-button > .fa-times-circle {
+  opacity: 0.5;
+}
+.avatar-wrapper > .profile-pic[src] ~ .remove-image-button:hover > .fa-times-circle {
+  opacity: 1;
+}
+.avatar-wrapper > .profile-pic[src] ~ .remove-image-button:hover ~ .upload-button > .fa-plus {
   opacity: 0;
 }

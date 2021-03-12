@@ -269,9 +269,9 @@ img {
   border-radius: 3px;
 }
 
-.multiple-image-container > .images-single {
+/* .multiple-image-container > .images-single {
   margin-right: -5px;
-}
+} */
 
 .tooltip.show {
   opacity: 0.8;

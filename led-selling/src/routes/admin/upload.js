@@ -11,7 +11,7 @@ let router = express.Router();
  */
 router.post("/", async (req, res, next) => {
   let uploadHandler = upload.single("image");
-  await uploadHandler(req, res, function (error) {
+  uploadHandler(req, res, function (error) {
     if (error) {
       if (error instanceof multer.MulterError) {
         return res.status(400).json({
@@ -27,5 +27,10 @@ router.post("/", async (req, res, next) => {
     next();
   });
 }, uploadController.uploadImage);
+
+/**
+ * Delete images
+ */
+router.delete('/', uploadController.deleteImages);
 
 export default router;

@@ -1,4 +1,6 @@
 let editor;
+let selection;
+let selected;
 
 class UploadAdapter {
     constructor(loader) {
@@ -7,33 +9,76 @@ class UploadAdapter {
 
     upload() {
         return this.loader.file
-            .then(file => {
-                return new Promise((resolve, reject) => {
-                    const formdata = new FormData();
-                    formdata.append('image', file);
-
-                    $.ajax({
-                        url: "/admin/upload",
-                        type: "POST",
-                        data: formdata,
-                        processData: false,
-                        contentType: false,
-                    })
-                        .done(function (result) {
-                            resolve({
-                                default: result.location,
-                            });
-                        })
-                        .fail(function (xhr) {
-                            let error = xhr.responseJSON;
-                            reject(error.message || error);
-                        });
-                });
-            });
+            .then( file => new Promise( ( resolve, reject ) => {
+                this._initRequest();
+                this._initListeners( resolve, reject, file );
+                this._sendRequest( file );
+            } ) );
     }
 
+    // Aborts the upload process.
     abort() {
+        if ( this.xhr ) {
+            this.xhr.abort();
+        }
     }
+
+    // Initializes the XMLHttpRequest object using the URL passed to the constructor.
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+
+        xhr.open( 'POST', '/admin/upload', true );
+        xhr.withCredentials = true;
+        xhr.responseType = 'json';
+    }
+
+    // Initializes XMLHttpRequest listeners.
+    _initListeners( resolve, reject, file ) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = `Couldn't upload file: ${ file.name }.`;
+
+        xhr.addEventListener( 'error', () => reject( genericErrorText ) );
+        xhr.addEventListener( 'abort', () => reject() );
+        xhr.addEventListener( 'load', () => {
+            const response = xhr.response;
+
+            if ( !response || !response?.location ) {
+                return reject( response?.message || genericErrorText );
+            }
+
+            resolve( {
+                default: response.location
+            } );
+        } );
+
+        if ( xhr.upload ) {
+            xhr.upload.addEventListener( 'progress', evt => {
+                if ( evt.lengthComputable ) {
+                    loader.uploadTotal = evt.total;
+                    loader.uploaded = evt.loaded;
+                }
+            } );
+        }
+    }
+
+    // Prepares the data and sends the request.
+    _sendRequest( file ) {
+        // Prepare the form data.
+        const data = new FormData();
+
+        data.append( 'image', file );
+
+        // Send the request.
+        this.xhr.send( data );
+    }
+}
+
+function MyCustomUploadAdapterPlugin( editor ) {
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+        // Configure the URL to the upload script in your back-end here!
+        return new UploadAdapter( loader );
+    };
 }
 
 DecoupledDocumentEditor
@@ -99,6 +144,7 @@ DecoupledDocumentEditor
         link: {
             addTargetToExternalLinks: true,
         },
+        extraPlugins: [ MyCustomUploadAdapterPlugin ],
     } )
     .then( newEditor => {
         editor = newEditor;
@@ -107,9 +153,57 @@ DecoupledDocumentEditor
 
         toolbarContainer.appendChild( editor.ui.view.toolbar.element );
 
-        editor.plugins.get('FileRepository').createUploadAdapter = (loader)=>{
-            return new UploadAdapter(loader);
-        };
+        editor.model.document.on('change:data', (event) => {
+            const differ = event.source.differ
+
+            // if no difference
+            if (differ.isEmpty) {
+                return;
+            }
+
+            const changes = differ.getChanges({
+                includeChangesInGraveyard: true
+            });
+
+            if (changes.length === 0) {
+                return;
+            }
+
+            let hasNoImageRemoved = true
+
+            // check any image remove or not
+            for (let i = 0; i < changes.length; i++){
+                const change = changes[i]
+                // if image remove exists
+                if (change && change.type === 'remove' && change.name === 'image') {
+                    hasNoImageRemoved = false
+                    break
+                }
+            }
+
+            // if not image remove stop execution
+            if (hasNoImageRemoved) {
+                return;
+            }
+
+            // get removed nodes
+            const removedNodes = changes.filter(change => (change.type === 'insert' && change.name === 'image'))
+
+            // removed images src
+            const removedImagesSrc = [];
+            // removed image nodes
+            const removedImageNodes = []
+
+            removedNodes.forEach(node => {
+                const removedNode = node.position.nodeAfter
+                removedImageNodes.push(removedNode)
+                removedImagesSrc.push(removedNode.getAttribute('src'))
+            });
+
+            if (removedImagesSrc.length) {
+                new DeleteImageAdapter(removedImagesSrc).delete();
+            }
+        });
     } )
     .catch( error => {
         console.error( error );
