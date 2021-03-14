@@ -2,14 +2,15 @@ import sharp from "sharp";
 import { v4 as uuid } from "uuid";
 import path from "path";
 import fs from "fs";
+import shortid from "shortid";
 
 class Resize {
   constructor(folder) {
     this.folder = folder;
   }
 
-  async save(buffer) {
-    const { filename, thumbFilename } = Resize.filename();
+  async save(buffer, originalname) {
+    const { filename, thumbFilename } = Resize.filename(originalname);
     const filepath = this.filepath(filename);
     const thumbFilepath = this.filepath(thumbFilename);
 
@@ -34,10 +35,12 @@ class Resize {
     };
   }
 
-  static filename() {
+  static filename(originalname) {
+    const extensionRegex = /(\.(jpeg|jpg|png))$/i;
     // random file name
-    const filename = uuid();
-    return { filename: `${filename}.png`, thumbFilename: `${filename}-thumb.png` };
+    const filename = originalname ? originalname.replace(extensionRegex, `-${shortid.generate()}$1`) : (uuid() + '.png');
+    const thumbFilename = filename.replace(extensionRegex, '_thumb$1');
+    return { filename, thumbFilename };
   }
 
   filepath(filename) {

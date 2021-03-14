@@ -1,16 +1,16 @@
 import multer from "multer";
-import path from "path";
 import { errorMessages } from "../i18n/messages/errorMessages";
 
-const allowedFileTypes = /jpeg|jpg|png/;
+const mineTypesRegex = /jpeg|jpg|png/;
+const extensionsRegex = /\.(jpeg|jpg|png)$/i;
 
 const upload = multer({
   limits: {
     fileSize: 10 * 1024 * 1024,
   },
   fileFilter: function (req, file, cb) {
-    let isAllowedFileTypes = allowedFileTypes.test(file.mimetype);
-    let hasExtName = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
+    let isAllowedFileTypes = mineTypesRegex.test(file.mimetype);
+    let hasExtName = extensionsRegex.test(file.originalname);
 
     if (isAllowedFileTypes && hasExtName) {
       return cb(null, true);

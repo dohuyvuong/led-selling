@@ -20,15 +20,21 @@ let uploadImage = async (req, res) => {
 
     if (!req.file) {
       return res.status(400).json({
-        error: errorMessages.file_empty,
+        message: errorMessages.file_empty,
       });
     }
 
-    let fileInfo = await fileUpload.save(req.file.buffer);
+    let fileInfo = await fileUpload.save(req.file.buffer, req.file.originalname);
 
     return res.status(200).json(fileInfo);
   } catch (error) {
     logger.error(error);
+
+    if (`${error}`.includes('unsupported image format')) {
+      return res.status(400).json({
+        message: errorMessages.unsupported_image_format,
+      });
+    }
 
     return res.status(500).json(errorMessages.server_error);
   }
@@ -50,9 +56,10 @@ let deleteImages = async (req, res) => {
 
     let publicFolder = path.join(__dirname, "../../public");
 
+    const extensionRegex = /(\.(jpeg|jpg|png))$/i;
+
     urls.forEach(url => {
-      const extPos = url.lastIndexOf('.png');
-      const thumbUrl = [url.slice(0, extPos), '-thumb', url.slice(extPos)].join('');
+      const thumbUrl = url.replace(extensionRegex, '_thumb$1');
 
       if (fs.existsSync(path.join(publicFolder, url))) {
         fs.unlink(path.join(publicFolder, url), () => {});

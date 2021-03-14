@@ -15,6 +15,7 @@ export const errorMessages = {
   },
   file_empty: "Vui lòng chọn hình ảnh!",
   file_type_not_allowed: "Kiểu tệp tin không được hỗ trợ!",
+  unsupported_image_format: "Không thể đọc tệp tin!",
   upload_error: {
     LIMIT_PART_COUNT: "Too many parts",
     LIMIT_FILE_SIZE: "Dung lượng tối đa là 10MB!",
